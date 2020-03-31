@@ -89,6 +89,7 @@ class HomePageState extends State<HomePage> {
                     child: Text('Result: $bmi')
                   ),
                   Container(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
                       onPressed: () {setState(() {
                         bmi = calculator(heightController.text, weightController.text);
