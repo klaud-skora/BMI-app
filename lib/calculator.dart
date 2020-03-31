@@ -1,8 +1,9 @@
 import 'dart:math';
 
-void calculator () {
-  var height = 5;
-  var weight = 10;
+void calculator (heightStr, weightStr) {
+
+  var height = int.parse(heightStr);
+  var weight = int.parse(weightStr);
   var result = weight / pow(height, 2); 
   print(result);
 }

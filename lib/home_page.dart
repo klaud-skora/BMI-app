@@ -11,7 +11,17 @@ class HomePageState extends State<HomePage> {
   
   final List<String> data = <String>['height', 'weight'];
   final List<String> units = <String>['cm', 'kg'];
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
   var bmi = '';
+
+   @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    heightController.dispose();
+    weightController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +72,7 @@ class HomePageState extends State<HomePage> {
                                     child: Flexible(
                                       child: SizedBox(
                                         width: 50, 
-                                        child: TextField()
+                                        child: TextField(controller: index == 0 ? heightController : weightController)
                                       ),
                                     ),
                                   ),
@@ -80,7 +90,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   Container(
                     child: RaisedButton(
-                      onPressed: () => calculator(),
+                      onPressed: () => calculator(heightController.text, weightController.text),
                       child: Text('Calculate'),
                     ),
                   ),
