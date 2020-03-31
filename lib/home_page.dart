@@ -13,7 +13,7 @@ class HomePageState extends State<HomePage> {
   final List<String> units = <String>['cm', 'kg'];
   final heightController = TextEditingController();
   final weightController = TextEditingController();
-  var bmi = '';
+  dynamic bmi = '';
 
    @override
   void dispose() {
@@ -86,11 +86,13 @@ class HomePageState extends State<HomePage> {
                     )
                   ),
                   Container(
-                    child: Text('Result: ')
+                    child: Text('Result: $bmi')
                   ),
                   Container(
                     child: RaisedButton(
-                      onPressed: () => calculator(heightController.text, weightController.text),
+                      onPressed: () {setState(() {
+                        bmi = calculator(heightController.text, weightController.text);
+                      });},
                       child: Text('Calculate'),
                     ),
                   ),
