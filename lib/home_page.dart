@@ -14,6 +14,7 @@ class HomePageState extends State<HomePage> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
   dynamic bmi = '';
+  bool validate = false;
 
    @override
   void dispose() {
@@ -72,7 +73,12 @@ class HomePageState extends State<HomePage> {
                                     child: Flexible(
                                       child: SizedBox(
                                         width: 50, 
-                                        child: TextField(controller: index == 0 ? heightController : weightController)
+                                        child: TextField(
+                                          controller: index == 0 ? heightController : weightController,
+                                          decoration: InputDecoration(
+                                            errorText: validate && ((index == 0 ? heightController : weightController).text == '') ? 'Empty' : null,
+                                          ),
+                                        )
                                       ),
                                     ),
                                   ),
@@ -91,9 +97,18 @@ class HomePageState extends State<HomePage> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
-                      onPressed: () {setState(() {
-                        bmi = calculator(heightController.text, weightController.text);
-                      });},
+                      onPressed: () {
+                        if(heightController.text.isEmpty || weightController.text.isEmpty) {
+                          setState(() {
+                            validate = true;
+                          }); 
+                        } else {
+                          setState(() {
+                            validate = false;
+                            bmi = calculator(heightController.text, weightController.text);
+                          });
+                        }
+                      },
                       child: Text('Calculate'),
                     ),
                   ),

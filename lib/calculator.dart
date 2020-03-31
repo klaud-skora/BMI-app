@@ -1,6 +1,6 @@
 import 'dart:math';
 
-String calculator (dynamic heightStr, dynamic weightStr) {
+String calculator (String heightStr, String weightStr) {
 
   var height = int.parse(heightStr);
   var weight = int.parse(weightStr);
