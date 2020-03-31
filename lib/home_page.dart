@@ -8,6 +8,9 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   
+  final List<String> data = <String>['height', 'weight'];
+  final List<String> units = <String>['cm', 'kg'];
+
   @override
   Widget build(BuildContext context) {
     var background = Color(0xffffdde6);
@@ -31,15 +34,17 @@ class HomePageState extends State<HomePage> {
             height: 420,
             width: 290,
             child: Center(
-              child: Column(
-                children: <Widget>[
-                  Container(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: <Widget>[
                         Container(
                           child: Text(
-                            'Type your height',
+                            'Type your ${data[index]}',
                             style: TextStyle(
                               color: Color(0xff0F2027),
                               fontWeight: FontWeight.bold,
@@ -57,48 +62,19 @@ class HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Text('cm'),
+                            Text(units[index]),
                           ],
                         )
                       ],
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(50.0),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            'Type your weight',
-                            style: TextStyle(
-                              color: Color(0xff0F2027),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Flexible(
-                                child: SizedBox(
-                                  width: 50, 
-                                  child: TextField()
-                                ),
-                              ),
-                            ),
-                            Text('kg'),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                  );
+                }
+              )
               )
             ),
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }
