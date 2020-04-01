@@ -3,9 +3,13 @@ import '../lib/calculator.dart';
 
 void main() {
 
- test('empty arguments return error', () {
+ test('empty arguments should return empty string', () {
     var result = calculator('','');
-    expect(result, 'Arguments can\'t be empty.');
+    expect(result, '');
  });
- 
+
+ test('strings with other signs than numbers should return empty string', () {
+    var result = calculator('abc','abc');
+    expect(result, '');
+ });
 }
