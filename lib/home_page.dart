@@ -16,14 +16,6 @@ class HomePageState extends State<HomePage> {
   dynamic bmi = '';
   bool validate = false;
 
-   @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    heightController.dispose();
-    weightController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     var background = Color(0xffffdde6);
