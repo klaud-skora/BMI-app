@@ -1,21 +1,46 @@
 import 'dart:math';
 
-double calculator (String heightStr, String weightStr, {bool state = false} ) {
+abstract class Calculator {
+  int height;
+  int weight;
+  bool positive;
+  //Calculator({this.height, this.weight});
 
-  var result;
-  if(heightStr != null && weightStr != null && (double.tryParse(heightStr) != null && double.tryParse(weightStr) != null) ) {    
-    var height = int.parse(heightStr);
-    var weight = int.parse(weightStr);
-
-    if(height <= 0 || weight <= 0) {
-      return result;
-    }
-    if(state) {
-      result = ((703 * (weight / pow(height, 2)))* 100).round() / 100; 
-    } else {
-      result = ((weight / pow(height * 0.01, 2))* 100).round() / 100;  
-    }
+  areArgsPositive(height, weight) {
+    if(height > 0 && weight > 0) positive = true;
   }
-  return result;
+  calculator(double height, double weight);
+}
+
+class MetricCalculator implements Calculator {
+  int height;
+  int weight;
+  double result;
+  bool positive;
+
+  areArgsPositive(height, weight) {
+    if(height > 0 && weight > 0) positive = true;
+  }
+
+  calculator(double height, double weight) {
+    areArgsPositive(height, weight);
+    return positive ? ((weight / pow(height * 0.01, 2))* 100).round() / 100 : null;
+  }
   
+}
+
+class ImperialCalculator implements Calculator {
+  int height;
+  int weight;
+  double result;
+  bool positive;
+
+  areArgsPositive(height, weight) {
+    if(height > 0 && weight > 0) positive = true;
+  }
+
+  calculator(height, weight) {
+    areArgsPositive(height, weight);
+    return positive ? ((703 * (weight / pow(height, 2)))* 100).round() / 100 : null; 
+  }
 }

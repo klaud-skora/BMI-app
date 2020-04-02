@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'calculator.dart';
+import 'parser.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -11,7 +12,8 @@ class HomePageState extends State<HomePage> {
   
   final heightController = TextEditingController();
   final weightController = TextEditingController();
-  dynamic bmi = '';
+  
+  var bmi;
   bool validate = false;
   bool state = false;
 
@@ -35,7 +37,7 @@ class HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
             ),
-            height: 460,
+            // height: 460,
             width: 290,
               child: Column(
                 children: <Widget>[
@@ -118,13 +120,20 @@ class HomePageState extends State<HomePage> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
-                      onPressed: () {
+                      onPressed: () { 
+
                         if(heightController.text.isEmpty || weightController.text.isEmpty) {
                           setState(() { validate = true; }); 
                         } else {
                           setState(() {
                             validate = false;
-                            bmi = calculator(heightController.text, weightController.text, state: state);
+                            final double height = parser(heightController.text);
+                            final double weight = parser(weightController.text);
+                            
+                            if(height != null && weight != null) {
+                              Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
+                              bmi = calculator.calculator(height, weight);
+                            }
                           });
                         }
                       },
