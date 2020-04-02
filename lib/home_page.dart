@@ -13,6 +13,7 @@ class HomePageState extends State<HomePage> {
   final weightController = TextEditingController();
   dynamic bmi = '';
   bool validate = false;
+  bool state = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,13 @@ class HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
             ),
-            height: 420,
+            height: 460,
             width: 290,
               child: Column(
                 children: <Widget>[
                   // Container for height
                   Container(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -50,7 +51,7 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(
+                        Row(                          
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Flexible(
@@ -64,7 +65,7 @@ class HomePageState extends State<HomePage> {
                                 )
                               ),
                             ),
-                            Text('cm'),
+                            Text(state ?  'ins' : 'cm'),
                           ],
                         )
                       ],
@@ -72,7 +73,9 @@ class HomePageState extends State<HomePage> {
                   ),
                   // Container for weight
                   Container(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.only(
+                      bottom: 35.0,
+                    ),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -96,11 +99,20 @@ class HomePageState extends State<HomePage> {
                                 )
                               ),
                             ),
-                            Text('kg'),
+                            Text(state ? 'lbs' : 'kg'),
                           ],
                         )
                       ],
                     ),
+                  ),
+                  Text('Change to imperial units.'),
+                  Switch(
+                    value: state,
+                    onChanged: (bool s) {
+                      setState(() {
+                        state = s;
+                      });
+                    },
                   ),
                   Text('Result: $bmi'),
                   Container(
@@ -112,7 +124,7 @@ class HomePageState extends State<HomePage> {
                         } else {
                           setState(() {
                             validate = false;
-                            bmi = calculator(heightController.text, weightController.text);
+                            bmi = calculator(heightController.text, weightController.text, state: state);
                           });
                         }
                       },
