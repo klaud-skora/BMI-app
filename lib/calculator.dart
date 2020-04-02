@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 String calculator (String heightStr, String weightStr) {
 
   var result ='';

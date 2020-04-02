@@ -44,7 +44,7 @@ class HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Type your height}',
+                          'Type your height',
                           style: TextStyle(
                             color: Color(0xff0F2027),
                             fontWeight: FontWeight.bold,
@@ -53,17 +53,17 @@ class HomePageState extends State<HomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                              Flexible(
-                                child: SizedBox(
-                                  width: 50, 
-                                  child: TextField(
-                                    controller: heightController,
-                                    decoration: InputDecoration(
-                                      errorText: validate && (weightController.text == '') ? 'Empty' : null,
-                                    ),
-                                  )
-                                ),
+                            Flexible(
+                              child: SizedBox(
+                                width: 50, 
+                                child: TextField(
+                                  controller: heightController,
+                                  decoration: InputDecoration(
+                                    errorText: validate && heightController.text.isEmpty ? 'Empty' : null,
+                                  ),
+                                )
                               ),
+                            ),
                             Text('cm'),
                           ],
                         )
@@ -76,7 +76,7 @@ class HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Type your weight}',
+                          'Type your weight',
                           style: TextStyle(
                             color: Color(0xff0F2027),
                             fontWeight: FontWeight.bold,
@@ -85,17 +85,17 @@ class HomePageState extends State<HomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                              Flexible(
-                                child: SizedBox(
-                                  width: 50, 
-                                  child: TextField(
-                                    controller: weightController,
-                                    decoration: InputDecoration(
-                                      errorText: validate && (weightController.text == '') ? 'Empty' : null,
-                                    ),
-                                  )
-                                ),
+                            Flexible(
+                              child: SizedBox(
+                                width: 50, 
+                                child: TextField(
+                                  controller: weightController,
+                                  decoration: InputDecoration(
+                                    errorText: validate && weightController.text.isEmpty ? 'Empty' : null,
+                                  ),
+                                )
                               ),
+                            ),
                             Text('kg'),
                           ],
                         )
@@ -108,9 +108,7 @@ class HomePageState extends State<HomePage> {
                     child: RaisedButton(
                       onPressed: () {
                         if(heightController.text.isEmpty || weightController.text.isEmpty) {
-                          setState(() {
-                            validate = true;
-                          }); 
+                          setState(() { validate = true; }); 
                         } else {
                           setState(() {
                             validate = false;
