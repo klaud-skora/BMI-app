@@ -8,6 +8,7 @@ abstract class Calculator {
 
   areArgsPositive(height, weight) {
     if(height > 0 && weight > 0) positive = true;
+    else positive = false;
   }
   calculator(double height, double weight);
 }
@@ -20,6 +21,7 @@ class MetricCalculator implements Calculator {
 
   areArgsPositive(height, weight) {
     if(height > 0 && weight > 0) positive = true;
+    else positive = false;
   }
 
   calculator(double height, double weight) {
@@ -37,6 +39,7 @@ class ImperialCalculator implements Calculator {
 
   areArgsPositive(height, weight) {
     if(height > 0 && weight > 0) positive = true;
+    else positive = false;
   }
 
   calculator(height, weight) {
