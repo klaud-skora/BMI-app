@@ -9,8 +9,6 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   
-  final List<String> data = <String>['height', 'weight'];
-  final List<String> units = <String>['cm', 'kg'];
   final heightController = TextEditingController();
   final weightController = TextEditingController();
   dynamic bmi = '';
@@ -40,52 +38,71 @@ class HomePageState extends State<HomePage> {
             width: 290,
               child: Column(
                 children: <Widget>[
-                  Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Text(
-                                  'Type your ${data[index]}',
-                                  style: TextStyle(
-                                    color: Color(0xff0F2027),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                  // Container for height
+                  Container(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'Type your height}',
+                          style: TextStyle(
+                            color: Color(0xff0F2027),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                              Flexible(
+                                child: SizedBox(
+                                  width: 50, 
+                                  child: TextField(
+                                    controller: heightController,
+                                    decoration: InputDecoration(
+                                      errorText: validate && (weightController.text == '') ? 'Empty' : null,
+                                    ),
+                                  )
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    child: Flexible(
-                                      child: SizedBox(
-                                        width: 50, 
-                                        child: TextField(
-                                          controller: index == 0 ? heightController : weightController,
-                                          decoration: InputDecoration(
-                                            errorText: validate && ((index == 0 ? heightController : weightController).text == '') ? 'Empty' : null,
-                                          ),
-                                        )
-                                      ),
-                                    ),
-                                  ),
-                                  Text(units[index]),
-                                ],
-                              )
-                            ],
-                          ),
-                        );
-                      }
-                    )
+                            Text('cm'),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
+                  // Container for weight
                   Container(
-                    child: Text('Result: $bmi')
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'Type your weight}',
+                          style: TextStyle(
+                            color: Color(0xff0F2027),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                              Flexible(
+                                child: SizedBox(
+                                  width: 50, 
+                                  child: TextField(
+                                    controller: weightController,
+                                    decoration: InputDecoration(
+                                      errorText: validate && (weightController.text == '') ? 'Empty' : null,
+                                    ),
+                                  )
+                                ),
+                              ),
+                            Text('kg'),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
+                  Text('Result: $bmi'),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
