@@ -127,14 +127,10 @@ class HomePageState extends State<HomePage> {
                         } else {
                           setState(() {
                             validate = false;
-                            //if()
                             final double height = parser(heightController.text);
                             final double weight = parser(weightController.text);
-                            
-                            if(height != null && weight != null) {
-                              Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
-                              bmi = calculator.calculator(height, weight);
-                            }
+                            Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
+                            bmi = calculator.calculator(height, weight);
                           });
                         }
                       },
