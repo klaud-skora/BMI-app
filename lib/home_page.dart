@@ -121,7 +121,6 @@ class HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
                       onPressed: () { 
-
                         if(heightController.text.isEmpty || weightController.text.isEmpty) {
                           setState(() { validate = true; }); 
                         } else {
