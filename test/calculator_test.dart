@@ -1,10 +1,11 @@
+// import 'package:my_app/calculator.dart';
 // import 'package:test/test.dart';
 // import '../lib/calculator.dart';
 
 // void main() {
 
 //  test('empty arguments should return empty string', () {
-//     var result = calculator('','');
+//     Calculator result = MetricCalculator();
 //     expect(result, null);
 //  });
 

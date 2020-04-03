@@ -116,7 +116,7 @@ class HomePageState extends State<HomePage> {
                       });
                     },
                   ),
-                  Text('Result: $bmi'),
+                  Text('Result: ${bmi != null ? bmi : ''}'),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
@@ -127,6 +127,7 @@ class HomePageState extends State<HomePage> {
                         } else {
                           setState(() {
                             validate = false;
+                            //if()
                             final double height = parser(heightController.text);
                             final double weight = parser(weightController.text);
                             
