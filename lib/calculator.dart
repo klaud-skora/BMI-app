@@ -6,29 +6,21 @@ abstract class Calculator {
   bool isNull;
   bool positive;
   
-  areNull(height, weight);
-
-  areArgsPositive(height, weight) {
-    if(height > 0 && weight > 0) positive = true;
-    else positive = false;
-  }
-  calculator(height, weight);
-}
-
-class MetricCalculator implements Calculator {
-  int height;
-  int weight;
-  double result;
-  bool isNull = false;
-  bool positive = true;
-
   areNull(height, weight) {
     if(height == null || weight == null) isNull = true; 
   }
 
-  void areArgsPositive(height, weight) {
+  areArgsPositive(height, weight) {
     if(height <= 0 || weight <= 0) positive = false;
   }
+  calculator(height, weight);
+}
+
+class MetricCalculator extends Calculator {
+  int height;
+  int weight;
+  bool isNull = false;
+  bool positive = true;
 
   calculator(height, weight) {
     areNull(height, weight);
@@ -38,20 +30,11 @@ class MetricCalculator implements Calculator {
   }
 }
 
-class ImperialCalculator implements Calculator {
+class ImperialCalculator extends Calculator {
   int height;
   int weight;
-  double result;
   bool isNull = false;
   bool positive = true;
-
-  areNull(height, weight) {
-    if(height == null || weight == null) isNull = true; 
-  }
-
-  areArgsPositive(height, weight) {
-    if(height <= 0 || weight <= 0) positive = false;
-  }
 
   calculator(height, weight) {
     areNull(height, weight);
