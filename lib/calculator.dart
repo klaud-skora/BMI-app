@@ -3,8 +3,8 @@ import 'dart:math';
 abstract class Calculator {
   int height;
   int weight;
-  bool isNull;
-  bool positive;
+  bool isNull = false;
+  bool positive = true;
   
   areNull(height, weight) {
     if(height == null || weight == null) isNull = true; 
@@ -17,10 +17,6 @@ abstract class Calculator {
 }
 
 class MetricCalculator extends Calculator {
-  int height;
-  int weight;
-  bool isNull = false;
-  bool positive = true;
 
   calculator(height, weight) {
     areNull(height, weight);
@@ -31,10 +27,6 @@ class MetricCalculator extends Calculator {
 }
 
 class ImperialCalculator extends Calculator {
-  int height;
-  int weight;
-  bool isNull = false;
-  bool positive = true;
 
   calculator(height, weight) {
     areNull(height, weight);
