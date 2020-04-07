@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'calculator.dart';
-import 'parser.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -13,20 +12,17 @@ class HomePageState extends State<HomePage> {
   
   final heightController = TextEditingController();
   final weightController = TextEditingController();
-  
-  var bmi;
-  bool validate = false;
-  bool state = false;
+
+  bool switchOn = false;
   double height = 0;
   double weight = 0;
-
-  // static Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
-  // bmi = calculator.calculator(height, weight);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     var background = Color(0xffffdde6);
+    Calculator calculator = switchOn ? ImperialCalculator() : MetricCalculator();
+    var bmi = calculator.calculator(height, weight);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -45,8 +41,7 @@ class HomePageState extends State<HomePage> {
               color: Colors.white,            
             ),
             height: size.height * 0.6,
-            // height: 460,
-            width: 290,
+            width: size.width * 0.8,
               child: Column(
                 children: <Widget>[
                   // Container for height
@@ -61,7 +56,7 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text('$height ' + (state ?  'ins' : 'cm')),
+                        Text('$height ' + (switchOn ?  'ins' : 'cm')),
                         CupertinoSlider(
                           value: height,
                           onChanged: (double value) {
@@ -72,7 +67,7 @@ class HomePageState extends State<HomePage> {
                           divisions: 500,
                           activeColor: Color(0xffb71540),
                           thumbColor: Color(0xffb71540),
-                        ),       
+                        ),
                       ],
                     ),
                   ),
@@ -90,7 +85,7 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text('$weight ' + (state ? 'lbs' : 'kg')),
+                        Text('$weight ' + (switchOn ? 'lbs' : 'kg')),
                         CupertinoSlider(
                           value: weight,
                           onChanged: (double value) {
@@ -107,34 +102,13 @@ class HomePageState extends State<HomePage> {
                   ),
                   Text('Change to imperial units.'),
                   Switch(
-                    value: state,
-                    onChanged: (bool s) {
-                      setState(() {
-                        state = s;
-                      });
+                    value: switchOn,
+                    onChanged: (bool state) {
+                      setState(() { switchOn = state; });
                     },
                     activeColor: Color(0xffb71540),
                   ),
-                  Text('Result: $bmi'),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    child: RaisedButton(
-                      onPressed: () { 
-                        if(heightController.text.isEmpty || weightController.text.isEmpty) {
-                          setState(() { validate = true; }); 
-                        } else {
-                          setState(() {
-                            validate = false;
-                            final double height = parser(heightController.text);
-                            final double weight = parser(weightController.text);
-                            Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
-                            bmi = calculator.calculator(height, weight);
-                          });
-                        }
-                      },
-                      child: Text('Calculate'),
-                    ),
-                  ),
+                  Text('Result: ${bmi == null ? 0 : bmi}'),
                 ],
               ),
             )
