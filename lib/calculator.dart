@@ -1,38 +1,32 @@
 import 'dart:math';
 
 abstract class Calculator {
-  int height;
-  int weight;
-  bool isNull = false;
-  bool positive = true;
-  
-  areNull(height, weight) {
-    if(height == null || weight == null) isNull = true; 
+  bool areNull(height, weight) {
+    return height == null || weight == null; 
   }
 
-  areArgsPositive(height, weight) {
-    if(height <= 0 || weight <= 0) positive = false;
+  bool areArgsPositive(height, weight) {
+    return height > 0 && weight > 0;
   }
-  calculator(height, weight);
+
+  double calculator(height, weight) {
+    if(areNull(height, weight)) return null;
+    return areArgsPositive(height, weight) 
+      ? bmi(height, weight) 
+      : null;
+  }
+
+  double bmi(height, weight);
 }
 
 class MetricCalculator extends Calculator {
-
-  calculator(height, weight) {
-    areNull(height, weight);
-    if(isNull) return null;
-    areArgsPositive(height, weight);
-    return positive ? ((weight / pow(height * 0.01, 2))* 100).round() / 100 : null;
-  }
+  bmi(height, weight) {
+    return ((weight / pow(height * 0.01, 2))* 100).round() / 100;
+  } 
 }
 
 class ImperialCalculator extends Calculator {
-
-  calculator(height, weight) {
-    areNull(height, weight);
-    if(isNull) return null;
-    areArgsPositive(height, weight);
-
-    return positive ? ((703 * (weight / pow(height, 2)))* 100).round() / 100 : null; 
+  bmi(height, weight) {
+    return ((703 * (weight / pow(height, 2)))* 100).round() / 100; 
   }
 }
