@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'calculator.dart';
 import 'parser.dart';
@@ -16,9 +17,15 @@ class HomePageState extends State<HomePage> {
   var bmi;
   bool validate = false;
   bool state = false;
+  double height = 0;
+  double weight = 0;
+
+  // static Calculator calculator = state ? ImperialCalculator() : MetricCalculator();
+  // bmi = calculator.calculator(height, weight);
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var background = Color(0xffffdde6);
     return Scaffold(
       appBar: AppBar(
@@ -35,8 +42,9 @@ class HomePageState extends State<HomePage> {
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
+              color: Colors.white,            
             ),
+            height: size.height * 0.6,
             // height: 460,
             width: 290,
               child: Column(
@@ -47,29 +55,24 @@ class HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Type your height',
+                          'Slide your height',
                           style: TextStyle(
                             color: Color(0xff0F2027),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(                          
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Flexible(
-                              child: SizedBox(
-                                width: 50, 
-                                child: TextField(
-                                  controller: heightController,
-                                  decoration: InputDecoration(
-                                    errorText: validate && heightController.text.isEmpty ? 'Empty' : null,
-                                  ),
-                                )
-                              ),
-                            ),
-                            Text(state ?  'ins' : 'cm'),
-                          ],
-                        )
+                        Text('$height ' + (state ?  'ins' : 'cm')),
+                        CupertinoSlider(
+                          value: height,
+                          onChanged: (double value) {
+                            setState(() => height = value);
+                          },
+                          min: 0.0,
+                          max: 250.0,
+                          divisions: 500,
+                          activeColor: Color(0xffb71540),
+                          thumbColor: Color(0xffb71540),
+                        ),       
                       ],
                     ),
                   ),
@@ -81,29 +84,24 @@ class HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Type your weight',
+                          'Slide your weight',
                           style: TextStyle(
                             color: Color(0xff0F2027),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Flexible(
-                              child: SizedBox(
-                                width: 50, 
-                                child: TextField(
-                                  controller: weightController,
-                                  decoration: InputDecoration(
-                                    errorText: validate && weightController.text.isEmpty ? 'Empty' : null,
-                                  ),
-                                )
-                              ),
-                            ),
-                            Text(state ? 'lbs' : 'kg'),
-                          ],
-                        )
+                        Text('$weight ' + (state ? 'lbs' : 'kg')),
+                        CupertinoSlider(
+                          value: weight,
+                          onChanged: (double value) {
+                            setState(() => weight = value);
+                          },
+                          min: 0.0,
+                          max: 150.0,
+                          divisions: 300,
+                          activeColor: Color(0xffb71540),
+                          thumbColor: Color(0xffb71540),
+                        ), 
                       ],
                     ),
                   ),
@@ -115,8 +113,9 @@ class HomePageState extends State<HomePage> {
                         state = s;
                       });
                     },
+                    activeColor: Color(0xffb71540),
                   ),
-                  Text('Result: ${bmi != null ? bmi : ''}'),
+                  Text('Result: $bmi'),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: RaisedButton(
