@@ -66,8 +66,8 @@ class HomePageState extends State<HomePage> {
                             setState(() => height = value);
                           },
                           min: 0.0,
-                          max: 250.0,
-                          divisions: 500,
+                          max: switchOn ? 100.0 : 250.0,
+                          divisions: switchOn ? 200 : 500,
                           activeColor: Color(0xffb71540),
                           thumbColor: Color(0xffb71540),
                         ),
@@ -98,8 +98,8 @@ class HomePageState extends State<HomePage> {
                             setState(() => weight = value);
                           },
                           min: 0.0,
-                          max: 150.0,
-                          divisions: 300,
+                          max: switchOn ? 300.0 : 150.0,
+                          divisions: switchOn ? 600 : 300,
                           activeColor: Color(0xffb71540),
                           thumbColor: Color(0xffb71540),
                         ), 
@@ -110,7 +110,11 @@ class HomePageState extends State<HomePage> {
                   Switch(
                     value: switchOn,
                     onChanged: (bool state) {
-                      setState(() { switchOn = state; });
+                      setState(() { 
+                        switchOn = state;
+                        height = 0;
+                        weight = 0; 
+                      });
                     },
                     activeColor: Color(0xffb71540),
                   ),
