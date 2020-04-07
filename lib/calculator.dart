@@ -60,7 +60,7 @@ extension RangeExtention on Range {
     Range.overweight: 29.9,
     Range.obese_I: 34.9,
     Range.obese_II: 39.9,
-    Range.obese_III: 99.9,
+    Range.obese_III: 1.0 / 0.0,
   };
 
  static final types = {
@@ -81,12 +81,10 @@ extension RangeExtention on Range {
 
 getBMI(bmi) {
   var type = Range.unknown.type;
-  print(bmi);
   for(Range range in Range.values ) {
     if(bmi != null) {
       if(range.lower <= bmi && range.upper >= bmi) type = range.type;
     } 
-    
   }
   return type;
 }
