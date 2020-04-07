@@ -23,11 +23,10 @@ class HomePageState extends State<HomePage> {
     var background = Color(0xffffdde6);
     Calculator calculator = switchOn ? ImperialCalculator() : MetricCalculator();
     var bmi = calculator.calculator(height, weight);
+    var range = getBMI(bmi);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'BMI calculator',
-        ),
+        title: const Text('BMI calculator'),
         backgroundColor: Color(0xff2C5364),
       ),
       body: Container(
@@ -56,18 +55,16 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
+                        SizedBox(height: 10.0),
                         Text('$height ' + (switchOn ?  'ins' : 'cm')),
                         CupertinoSlider(
                           value: height,
                           onChanged: (double value) {
-                            setState(() => height = value);
+                            setState(() => height = (value * 100).round() / 100);
                           },
                           min: 0.0,
                           max: switchOn ? 100.0 : 250.0,
-                          divisions: switchOn ? 200 : 500,
+                          divisions: switchOn ? 400 : 500,
                           activeColor: Color(0xffb71540),
                           thumbColor: Color(0xffb71540),
                         ),
@@ -88,18 +85,16 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
+                        SizedBox(height: 10.0),
                         Text('$weight ' + (switchOn ? 'lbs' : 'kg')),
                         CupertinoSlider(
                           value: weight,
                           onChanged: (double value) {
-                            setState(() => weight = value);
+                            setState(() => weight = (value * 100).round() / 100);
                           },
                           min: 0.0,
                           max: switchOn ? 300.0 : 150.0,
-                          divisions: switchOn ? 600 : 300,
+                          divisions: switchOn ? 1200 : 300,
                           activeColor: Color(0xffb71540),
                           thumbColor: Color(0xffb71540),
                         ), 
@@ -119,6 +114,8 @@ class HomePageState extends State<HomePage> {
                     activeColor: Color(0xffb71540),
                   ),
                   Text('Result: ${bmi == null ? 0 : bmi}'),
+                  SizedBox(height: 10.0),
+                  Text('$range'),
                 ],
               ),
             )
