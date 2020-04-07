@@ -56,6 +56,9 @@ class HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                         Text('$height ' + (switchOn ?  'ins' : 'cm')),
                         CupertinoSlider(
                           value: height,
@@ -84,6 +87,9 @@ class HomePageState extends State<HomePage> {
                             color: Color(0xff0F2027),
                             fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
                         ),
                         Text('$weight ' + (switchOn ? 'lbs' : 'kg')),
                         CupertinoSlider(
