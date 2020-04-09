@@ -53,24 +53,14 @@ extension RangeExtention on Range {
     Range.obese_III: double.infinity,
   };
 
- static final types = {
-    Range.unknown: '',
-    Range.underweight: 'Underweight',
-    Range.normal: 'Normal weight',
-    Range.overweight: 'Overweight',
-    Range.obese_I: 'Obesity level I',
-    Range.obese_II: 'Obesity level II',
-    Range.obese_III: 'Obesity level III'
-  };
-
   double get upper => uppers[this];
-  String get type => types[this];
-
 }
 
-getBMI(bmi) {
-  if (bmi == null) return Range.unknown.type;
-  for(Range range in Range.values ) {
-    if( bmi <= range.upper) return range.type;
+Range getBMI(double bmi) {
+  if (bmi != null) {
+    for(Range range in Range.values ) {
+      if( bmi <= range.upper ) return range;
+    }
   }
+  return Range.unknown;
 }

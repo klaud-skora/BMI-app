@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../logic/calculator.dart';
+import 'type_extension.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -22,9 +23,10 @@ class HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     var background = Color(0xffffdde6);
     Calculator calculator = switchOn ? ImperialCalculator() : MetricCalculator();
-    var bmi = calculator.calculator(height, weight);
-    var range = getBMI(bmi);
-    print(range);
+    double bmi = calculator.calculator(height, weight);
+    Range range = getBMI(bmi);
+    String type = getType(range);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI calculator'),
@@ -114,7 +116,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   Text('Result: ${bmi == null ? 0 : bmi}'),
                   SizedBox(height: 10.0),
-                  Text('$range'),
+                  Text('$type'),
                 ],
               ),
             )
