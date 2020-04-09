@@ -25,7 +25,6 @@ class HomePageState extends State<HomePage> {
     Calculator calculator = switchOn ? ImperialCalculator() : MetricCalculator();
     double bmi = calculator.calculator(height, weight);
     Range range = getBMI(bmi);
-    String type = getType(range);
     
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +115,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   Text('Result: ${bmi == null ? 0 : bmi}'),
                   SizedBox(height: 10.0),
-                  Text('$type'),
+                  Text('${range.type}'),
                 ],
               ),
             )

@@ -13,7 +13,3 @@ extension TypeExtension on Range {
 
   String get type => types[this];
 }
-
-String getType(Range range) {
-  return range.type;
-}
