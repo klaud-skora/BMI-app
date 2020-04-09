@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'logic/calculator.dart';
+import '../logic/calculator.dart';
 
 class HomePage extends StatefulWidget {
 
