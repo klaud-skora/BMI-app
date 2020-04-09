@@ -43,16 +43,6 @@ enum Range {
 
 extension RangeExtention on Range {
 
-  static final lowers = {
-    Range.unknown: 0.0,
-    Range.underweight: 10.0,
-    Range.normal: 18.6,
-    Range.overweight: 25.0,
-    Range.obese_I: 30.0,
-    Range.obese_II: 35.0,
-    Range.obese_III: 40.0,
-  };
-
   static final uppers = {
     Range.unknown: 9.9,
     Range.underweight: 18.5,
@@ -60,7 +50,7 @@ extension RangeExtention on Range {
     Range.overweight: 29.9,
     Range.obese_I: 34.9,
     Range.obese_II: 39.9,
-    Range.obese_III: 1.0 / 0.0,
+    Range.obese_III: double.infinity,
   };
 
  static final types = {
@@ -73,18 +63,14 @@ extension RangeExtention on Range {
     Range.obese_III: 'Obesity level III'
   };
 
-  double get lower => lowers[this];
   double get upper => uppers[this];
   String get type => types[this];
 
 }
 
 getBMI(bmi) {
-  var type = Range.unknown.type;
+  if (bmi == null) return Range.unknown.type;
   for(Range range in Range.values ) {
-    if(bmi != null) {
-      if(range.lower <= bmi && range.upper >= bmi) type = range.type;
-    } 
+    if( bmi <= range.upper) return range.type;
   }
-  return type;
 }

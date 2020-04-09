@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../lib/parser.dart';
+import '../lib/logic/parser.dart';
 
 void main() {
   test('test good input' , () {

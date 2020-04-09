@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'calculator.dart';
+import 'logic/calculator.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -24,6 +24,7 @@ class HomePageState extends State<HomePage> {
     Calculator calculator = switchOn ? ImperialCalculator() : MetricCalculator();
     var bmi = calculator.calculator(height, weight);
     var range = getBMI(bmi);
+    print(range);
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI calculator'),
@@ -73,9 +74,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   // Container for weight
                   Container(
-                    padding: const EdgeInsets.only(
-                      bottom: 35.0,
-                    ),
+                    padding: const EdgeInsets.only(bottom: 35.0),
                     child: Column(
                       children: <Widget>[
                         Text(

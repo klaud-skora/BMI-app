@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../lib/calculator.dart';
+import '../lib/logic/calculator.dart';
 
 void main() {
 Calculator metric = MetricCalculator();
