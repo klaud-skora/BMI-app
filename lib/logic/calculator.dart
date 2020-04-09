@@ -59,8 +59,11 @@ extension RangeExtention on Range {
 Range getBMI(double bmi) {
   if (bmi != null) {
     for(Range range in Range.values ) {
-      if( bmi <= range.upper ) return range;
+      if( bmi < range.upper ) return range;
     }
   }
   return Range.unknown;
 }
+// Range getBMI(double bmi) {
+//   return Range.values.firstWhere((range) => bmi < range.upper, orElse: () => Range.unknown);
+// }
