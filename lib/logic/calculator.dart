@@ -44,12 +44,12 @@ enum Range {
 extension RangeExtention on Range {
 
   static final uppers = {
-    Range.unknown: 9.9,
+    Range.unknown: 10.0,
     Range.underweight: 18.5,
-    Range.normal: 24.9,
-    Range.overweight: 29.9,
-    Range.obese_I: 34.9,
-    Range.obese_II: 39.9,
+    Range.normal: 25.0,
+    Range.overweight: 30.0,
+    Range.obese_I: 35.0,
+    Range.obese_II: 40.0,
     Range.obese_III: double.infinity,
   };
 
